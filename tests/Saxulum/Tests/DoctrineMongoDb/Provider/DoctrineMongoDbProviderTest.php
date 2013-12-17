@@ -34,7 +34,7 @@ class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
             $database->dropCollection('sample');
 
         } catch(\MongoConnectionException $e) {
-            $this->markTestSkipped('can\'t connect to the server');
+            $this->markTestSkipped($e->getMessage());
         }
     }
 }
