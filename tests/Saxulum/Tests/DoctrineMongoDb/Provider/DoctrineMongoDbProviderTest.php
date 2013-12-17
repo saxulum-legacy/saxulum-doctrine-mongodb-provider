@@ -15,13 +15,7 @@ class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
         }
 
         $app = new Application();
-        $app->register(new DoctrineMongoDbProvider(), array(
-            'mongodb.options' => array(
-                'username' => 'root',
-                'password' => 'root',
-                'db' => 'admin'
-            ),
-        ));
+        $app->register(new DoctrineMongoDbProvider());
 
         /** @var Connection $mongodb */
         $mongodb = $app['mongodb'];
