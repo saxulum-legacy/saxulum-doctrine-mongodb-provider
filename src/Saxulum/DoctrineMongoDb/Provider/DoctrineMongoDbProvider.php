@@ -13,9 +13,7 @@ class DoctrineMongoDbProvider
     {
         $container['mongodb.default_options'] = array(
             'server' => 'mongodb://localhost:27017',
-            'options' => array(
-                'connect' => true,
-            )
+            'options' => array()
             /** @link http://www.php.net/manual/en/mongoclient.construct.php */
         );
 
