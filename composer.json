@@ -11,8 +11,8 @@
     ],
     "require": {
         "php": ">=5.3.3",
+        "doctrine/mongodb": "~1.1",
         "pimple/pimple": "1.*@dev",
-        "doctrine/mongodb": "1.*@beta"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
