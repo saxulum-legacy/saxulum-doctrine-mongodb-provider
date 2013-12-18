@@ -1,7 +1,7 @@
 {
-    "name": "saxulum/doctrine-mongodb-provider",
-    "description": "Doctrine MongoDB Provider",
-    "keywords": ["pimple", "cilex", "silex", "doctrine", "mongo", "mongodb"],
+    "name": "saxulum/saxulum-doctrine-mongodb-provider",
+    "description": "Saxulum Doctrine MongoDB Provider",
+    "keywords": ["saxulum", "pimple", "cilex", "silex", "doctrine", "mongo", "mongodb"],
     "license": "MIT",
     "authors": [
         {

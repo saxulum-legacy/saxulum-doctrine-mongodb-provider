@@ -11,7 +11,7 @@
          bootstrap="tests/bootstrap.php"
         >
     <testsuites>
-        <testsuite name="Doctrine MongoDB Provider">
+        <testsuite name="Saxulum Doctrine MongoDB Provider">
             <directory>./tests/Saxulum/</directory>
         </testsuite>
     </testsuites>

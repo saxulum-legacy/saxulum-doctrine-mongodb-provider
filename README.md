@@ -1,11 +1,11 @@
-doctrine-mongodb-provider
-=========================
+saxulum-doctrine-mongodb-provider
+=================================
 
 **works with plain silex-php**
 
-[![Build Status](https://api.travis-ci.org/saxulum/doctrine-mongodb-provider.png?branch=master)](https://travis-ci.org/saxulum/doctrine-mongodb-provider)
-[![Total Downloads](https://poser.pugx.org/saxulum/doctrine-mongodb-provider/downloads.png)](https://packagist.org/packages/saxulum/doctrine-mongodb-provider)
-[![Latest Stable Version](https://poser.pugx.org/saxulum/doctrine-mongodb-provider/v/stable.png)](https://packagist.org/packages/saxulum/doctrine-mongodb-provider)
+[![Build Status](https://api.travis-ci.org/saxulum/saxulum-doctrine-mongodb-provider.png?branch=master)](https://travis-ci.org/saxulum/saxulum-doctrine-mongodb-provider)
+[![Total Downloads](https://poser.pugx.org/saxulum/saxulum-doctrine-mongodb-provider/downloads.png)](https://packagist.org/packages/saxulum/saxulum-doctrine-mongodb-provider)
+[![Latest Stable Version](https://poser.pugx.org/saxulum/saxulum-doctrine-mongodb-provider/v/stable.png)](https://packagist.org/packages/saxulum/saxulum-doctrine-mongodb-provider)
 
 Features
 --------
@@ -21,7 +21,7 @@ Requirements
 Installation
 ------------
 
-Through [Composer](http://getcomposer.org) as [saxulum / doctrine-mongodb-provider][4].
+Through [Composer](http://getcomposer.org) as [saxulum/saxulum-doctrine-mongodb-provider][4].
 
 Example for one connection:
 
@@ -72,7 +72,7 @@ Example for one connection:
 $document = array('key' => 'value');
 
 $app['mongodb']
-    ->selectDatabase('doctrine-mongodb-provider')
+    ->selectDatabase('saxulum-doctrine-mongodb-provider')
     ->selectCollection('sample')
     ->insert($document)
 ;
@@ -84,7 +84,7 @@ Example for multiple connections:
 $document = array('key' => 'value');
 
 $app['mongodbs']['mongo_write']
-    ->selectDatabase('doctrine-mongodb-provider')
+    ->selectDatabase('saxulum-doctrine-mongodb-provider')
     ->selectCollection('sample')
     ->insert($document)
 ;
@@ -93,4 +93,4 @@ $app['mongodbs']['mongo_write']
 [1]: http://silex.sensiolabs.org/doc/providers/doctrine.html
 [2]: https://github.com/Cilex/Cilex/blob/master/src/Cilex/Provider/DoctrineServiceProvider.php
 [3]: http://docs.doctrine-project.org/projects/doctrine-mongodb-odm/en/latest/
-[4]: https://packagist.org/packages/saxulum/doctrine-mongodb-provider
+[4]: https://packagist.org/packages/saxulum/saxulum-doctrine-mongodb-provider

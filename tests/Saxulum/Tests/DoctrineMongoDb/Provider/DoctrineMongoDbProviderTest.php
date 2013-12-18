@@ -30,7 +30,7 @@ class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($app['mongodbs']['default'], $mongodb);
 
-        $database = $mongodb->selectDatabase('doctrine-mongodb-provider');
+        $database = $mongodb->selectDatabase('saxulum-doctrine-mongodb-provider');
         $collection = $database->selectCollection('sample');
 
         $document = array('key' => 'value');
