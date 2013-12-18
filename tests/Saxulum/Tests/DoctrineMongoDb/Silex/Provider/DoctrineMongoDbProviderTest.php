@@ -10,7 +10,7 @@ class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
 {
     public function testSingleConnection()
     {
-        if(!extension_loaded('mongo')) {
+        if (!extension_loaded('mongo')) {
             $this->markTestSkipped('mongo is not available');
         }
 

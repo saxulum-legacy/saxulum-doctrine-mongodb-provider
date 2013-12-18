@@ -24,5 +24,5 @@ namespace Saxulum\DoctrineMongoDb\Logger;
  */
 interface LoggerInterface
 {
-    function logQuery(array $query);
+    public function logQuery(array $query);
 }

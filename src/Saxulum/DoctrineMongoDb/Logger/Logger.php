@@ -48,17 +48,20 @@ class Logger implements LoggerInterface
             $query['data'] = '**'.$query['num'].' item(s)**';
         }
 
-        array_walk_recursive($query, function(&$value, $key) {
+        array_walk_recursive($query, function (&$value, $key) {
             if ($value instanceof \MongoBinData) {
                 $value = base64_encode($value->bin);
+
                 return;
             }
             if (is_float($value) && is_infinite($value)) {
                 $value = ($value < 0 ? '-' : '') . 'Infinity';
+
                 return;
             }
             if (is_float($value) && is_nan($value)) {
                 $value = 'NaN';
+
                 return;
             }
         });
