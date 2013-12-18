@@ -90,7 +90,14 @@ $app['mongodbs']['mongo_write']
 ;
 ```
 
-[1]: http://silex.sensiolabs.org/doc/providers/doctrine.html
-[2]: https://github.com/Cilex/Cilex/blob/master/src/Cilex/Provider/DoctrineServiceProvider.php
+Copyright
+---------
+* Dominik Zogg <dominik.zogg@gmail.com>
+* Fabien Potencier <fabien@symfony.com> ([DoctrineServiceProvider][5], Logger)
+* Kris Wallsmith <kris@symfony.com> (Logger)
+
+[1]: http://silex.sensiolabs.org/
+[2]: http://cilex.github.io/
 [3]: http://docs.doctrine-project.org/projects/doctrine-mongodb-odm/en/latest/
 [4]: https://packagist.org/packages/saxulum/saxulum-doctrine-mongodb-provider
+[5]: http://silex.sensiolabs.org/doc/providers/doctrine.html
