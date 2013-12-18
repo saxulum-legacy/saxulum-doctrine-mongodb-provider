@@ -72,9 +72,9 @@ class DoctrineMongoDbProvider
             foreach ($container['mongodbs.options'] as $name => $options) {
                 $configs[$name] = new Configuration();
 
-                if (isset($container['logger']) && class_exists('Symfony\Component\HttpKernel\Log\LoggerInterface')) {
+                if (isset($container['logger'])) {
                     $logger = new Logger($container['logger']);
-                    $configs[$name]->setLoggerCallable(array('','logQuery'));
+                    $configs[$name]->setLoggerCallable(array($logger,'logQuery'));
                 }
             }
 

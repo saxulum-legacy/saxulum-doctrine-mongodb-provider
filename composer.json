@@ -13,6 +13,7 @@
         "php": ">=5.3.3",
         "doctrine/mongodb": "~1.1",
         "pimple/pimple": "1.*@dev",
+        "psr/log": "1.0.*"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
