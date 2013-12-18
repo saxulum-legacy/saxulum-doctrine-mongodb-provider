@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\Tests\DoctrineMongoDb\Provider;
+namespace Saxulum\Tests\DoctrineMongoDb\Silex\Provider;
 
 use Doctrine\MongoDB\Connection;
 use Saxulum\DoctrineMongoDb\Silex\Provider\DoctrineMongoDbProvider;
