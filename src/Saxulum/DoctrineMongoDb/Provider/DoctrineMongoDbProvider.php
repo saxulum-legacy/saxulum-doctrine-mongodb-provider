@@ -13,12 +13,14 @@ class DoctrineMongoDbProvider
     {
         $app['mongodb.default_options'] = array(
             'server' => 'mongodb://localhost:27017',
-            'connect' => true,
-            'timeout' => 5000,
-            'replicaSet' => null,
-            'username' => null,
-            'password' => null,
-            'db' => null
+            'options' => array(
+                'connect' => true,
+                'timeout' => 5000,
+                'replicaSet' => null,
+                'username' => null,
+                'password' => null,
+                'db' => null
+            )
         );
 
         $app['mongodbs.options.initializer'] = $app->protect(function () use ($app) {
@@ -36,7 +38,7 @@ class DoctrineMongoDbProvider
 
             $tmp = $app['mongodbs.options'];
             foreach ($tmp as $name => &$options) {
-                $options = array_replace($app['mongodb.default_options'], $options);
+                $options = array_replace_recursive($app['mongodb.default_options'], $options);
 
                 if (!isset($app['mongodbs.default'])) {
                     $app['mongodbs.default'] = $name;
@@ -50,10 +52,6 @@ class DoctrineMongoDbProvider
 
             $mongodbs = new \Pimple();
             foreach ($app['mongodbs.options'] as $name => $options) {
-
-                $server = $options['server'];
-                unset($options['server']);
-
                 if ($app['mongodbs.default'] === $name) {
                     // we use shortcuts here in case the default has been overridden
                     $config = $app['mongodb.config'];
@@ -63,8 +61,8 @@ class DoctrineMongoDbProvider
                     $manager = $app['mongodbs.event_manager'][$name];
                 }
 
-                $mongodbs[$name] = $mongodbs->share(function () use ($server, $options, $config, $manager) {
-                    return new Connection($server, $options, $config, $manager);
+                $mongodbs[$name] = $mongodbs->share(function () use ($options, $config, $manager) {
+                    return new Connection($options['server'], $options['options'], $config, $manager);
                 });
             }
 
