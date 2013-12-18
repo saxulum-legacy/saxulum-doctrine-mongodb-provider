@@ -9,9 +9,9 @@ use Saxulum\DoctrineMongoDb\Logger\Logger;
 
 class DoctrineMongoDbProvider
 {
-    public function register(\Pimple $app)
+    public function register(\Pimple $container)
     {
-        $app['mongodb.default_options'] = array(
+        $container['mongodb.default_options'] = array(
             'server' => 'mongodb://localhost:27017',
             'options' => array(
                 'connect' => true,
@@ -19,7 +19,7 @@ class DoctrineMongoDbProvider
             /** @link http://www.php.net/manual/en/mongoclient.construct.php */
         );
 
-        $app['mongodbs.options.initializer'] = $app->protect(function () use ($app) {
+        $container['mongodbs.options.initializer'] = $container->protect(function () use ($container) {
             static $initialized = false;
 
             if ($initialized) {
@@ -28,33 +28,33 @@ class DoctrineMongoDbProvider
 
             $initialized = true;
 
-            if (!isset($app['mongodbs.options'])) {
-                $app['mongodbs.options'] = array('default' => isset($app['mongodb.options']) ? $app['mongodb.options'] : array());
+            if (!isset($container['mongodbs.options'])) {
+                $container['mongodbs.options'] = array('default' => isset($container['mongodb.options']) ? $container['mongodb.options'] : array());
             }
 
-            $tmp = $app['mongodbs.options'];
+            $tmp = $container['mongodbs.options'];
             foreach ($tmp as $name => &$options) {
-                $options = array_replace_recursive($app['mongodb.default_options'], $options);
+                $options = array_replace_recursive($container['mongodb.default_options'], $options);
 
-                if (!isset($app['mongodbs.default'])) {
-                    $app['mongodbs.default'] = $name;
+                if (!isset($container['mongodbs.default'])) {
+                    $container['mongodbs.default'] = $name;
                 }
             }
-            $app['mongodbs.options'] = $tmp;
+            $container['mongodbs.options'] = $tmp;
         });
 
-        $app['mongodbs'] = $app->share(function ($app) {
-            $app['mongodbs.options.initializer']();
+        $container['mongodbs'] = $container->share(function ($container) {
+            $container['mongodbs.options.initializer']();
 
             $mongodbs = new \Pimple();
-            foreach ($app['mongodbs.options'] as $name => $options) {
-                if ($app['mongodbs.default'] === $name) {
+            foreach ($container['mongodbs.options'] as $name => $options) {
+                if ($container['mongodbs.default'] === $name) {
                     // we use shortcuts here in case the default has been overridden
-                    $config = $app['mongodb.config'];
-                    $manager = $app['mongodb.event_manager'];
+                    $config = $container['mongodb.config'];
+                    $manager = $container['mongodb.event_manager'];
                 } else {
-                    $config = $app['mongodbs.config'][$name];
-                    $manager = $app['mongodbs.event_manager'][$name];
+                    $config = $container['mongodbs.config'][$name];
+                    $manager = $container['mongodbs.event_manager'][$name];
                 }
 
                 $mongodbs[$name] = $mongodbs->share(function () use ($options, $config, $manager) {
@@ -65,15 +65,15 @@ class DoctrineMongoDbProvider
             return $mongodbs;
         });
 
-        $app['mongodbs.config'] = $app->share(function ($app) {
-            $app['mongodbs.options.initializer']();
+        $container['mongodbs.config'] = $container->share(function ($container) {
+            $container['mongodbs.options.initializer']();
 
             $configs = new \Pimple();
-            foreach ($app['mongodbs.options'] as $name => $options) {
+            foreach ($container['mongodbs.options'] as $name => $options) {
                 $configs[$name] = new Configuration();
 
-                if (isset($app['logger']) && class_exists('Symfony\Component\HttpKernel\Log\LoggerInterface')) {
-                    $logger = new Logger($app['logger']);
+                if (isset($container['logger']) && class_exists('Symfony\Component\HttpKernel\Log\LoggerInterface')) {
+                    $logger = new Logger($container['logger']);
                     $configs[$name]->setLoggerCallable(array('','logQuery'));
                 }
             }
@@ -81,11 +81,11 @@ class DoctrineMongoDbProvider
             return $configs;
         });
 
-        $app['mongodbs.event_manager'] = $app->share(function ($app) {
-            $app['mongodbs.options.initializer']();
+        $container['mongodbs.event_manager'] = $container->share(function ($container) {
+            $container['mongodbs.options.initializer']();
 
             $managers = new \Pimple();
-            foreach ($app['mongodbs.options'] as $name => $options) {
+            foreach ($container['mongodbs.options'] as $name => $options) {
                 $managers[$name] = new EventManager();
             }
 
@@ -93,22 +93,22 @@ class DoctrineMongoDbProvider
         });
 
         // shortcuts for the "first" DB
-        $app['mongodb'] = $app->share(function ($app) {
-            $mongodbs = $app['mongodbs'];
+        $container['mongodb'] = $container->share(function ($container) {
+            $mongodbs = $container['mongodbs'];
 
-            return $mongodbs[$app['mongodbs.default']];
+            return $mongodbs[$container['mongodbs.default']];
         });
 
-        $app['mongodb.config'] = $app->share(function ($app) {
-            $mongodbs = $app['mongodbs.config'];
+        $container['mongodb.config'] = $container->share(function ($container) {
+            $mongodbs = $container['mongodbs.config'];
 
-            return $mongodbs[$app['mongodbs.default']];
+            return $mongodbs[$container['mongodbs.default']];
         });
 
-        $app['mongodb.event_manager'] = $app->share(function ($app) {
-            $mongodbs = $app['mongodbs.event_manager'];
+        $container['mongodb.event_manager'] = $container->share(function ($container) {
+            $mongodbs = $container['mongodbs.event_manager'];
 
-            return $mongodbs[$app['mongodbs.default']];
+            return $mongodbs[$container['mongodbs.default']];
         });
     }
 }
