@@ -21,6 +21,13 @@ class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
         $mongodb = $app['mongodb'];
 
         $this->assertSame($app['mongodbs']['default'], $mongodb);
+        $this->assertInstanceOf('Doctrine\MongoDB\Connection', $mongodb);
+
+        $this->assertSame($app['mongodbs.config']['default'], $app['mongodb.config']);
+        $this->assertInstanceOf('Doctrine\MongoDB\Configuration', $app['mongodb.config']);
+
+        $this->assertSame($app['mongodbs.event_manager']['default'], $app['mongodb.event_manager']);
+        $this->assertInstanceOf('Doctrine\Common\EventManager', $app['mongodb.event_manager']);
 
         $database = $mongodb->selectDatabase('saxulum-doctrine-mongodb-provider');
         $collection = $database->selectCollection('sample');
