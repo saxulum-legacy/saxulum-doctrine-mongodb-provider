@@ -15,12 +15,8 @@ class DoctrineMongoDbProvider
             'server' => 'mongodb://localhost:27017',
             'options' => array(
                 'connect' => true,
-                'timeout' => 5000,
-                'replicaSet' => null,
-                'username' => null,
-                'password' => null,
-                'db' => null
             )
+            /** @link http://www.php.net/manual/en/mongoclient.construct.php */
         );
 
         $app['mongodbs.options.initializer'] = $app->protect(function () use ($app) {
