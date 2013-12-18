@@ -32,7 +32,7 @@ $app->register(new DoctrineMongoDbProvider(), array(
         'options' => array(
             'username' => 'root',
             'password' => 'root',
-            'db' => 'admin
+            'db' => 'admin'
         )
     )
 ));
@@ -48,7 +48,7 @@ $app->register(new DoctrineMongoDbProvider(), array(
             'options' => array(
                 'username' => 'root',
                 'password' => 'root',
-                'db' => 'admin
+                'db' => 'admin'
             )
         ),
         'mongo_write' => array(
@@ -56,7 +56,7 @@ $app->register(new DoctrineMongoDbProvider(), array(
             'options' => array(
                 'username' => 'root',
                 'password' => 'root',
-                'db' => 'admin
+                'db' => 'admin'
             )
         )
     )
