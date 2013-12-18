@@ -10,6 +10,7 @@ php:
   - 5.5
 
 before_script:
+  - mongo admin --eval 'db.addUser("root", "root");'
   - phpenv config-add .travis.php.ini
   - composer --prefer-source --dev install
 

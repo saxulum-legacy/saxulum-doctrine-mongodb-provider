@@ -15,26 +15,29 @@ class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
         }
 
         $app = new Application();
-        $app->register(new DoctrineMongoDbProvider());
+        $app->register(new DoctrineMongoDbProvider(), array(
+            'mongodb.options' => array(
+                'options' => array(
+                    'username' => 'root',
+                    'password' => 'root',
+                    'db' => 'admin'
+                )
+            )
+        ));
 
         /** @var Connection $mongodb */
         $mongodb = $app['mongodb'];
 
         $this->assertSame($app['mongodbs']['default'], $mongodb);
 
-        try {
-            $database = $mongodb->selectDatabase('doctrine-mongodb-provider');
-            $collection = $database->selectCollection('sample');
+        $database = $mongodb->selectDatabase('doctrine-mongodb-provider');
+        $collection = $database->selectCollection('sample');
 
-            $document = array('key' => 'value');
-            $collection->insert($document);
+        $document = array('key' => 'value');
+        $collection->insert($document);
 
-            $this->assertArrayHasKey('_id', $document);
+        $this->assertArrayHasKey('_id', $document);
 
-            $database->dropCollection('sample');
-
-        } catch(\MongoConnectionException $e) {
-            $this->markTestSkipped($e->getMessage());
-        }
+        $database->dropCollection('sample');
     }
 }
