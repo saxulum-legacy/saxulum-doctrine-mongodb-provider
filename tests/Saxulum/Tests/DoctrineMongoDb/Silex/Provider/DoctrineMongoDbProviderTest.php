@@ -58,10 +58,13 @@ class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
             )
         ));
 
+        /** @var Connection $mongodb */
+        $mongodb = $app['mongodb'];
+
         $this->assertSame('mongo1', $app['mongodbs.default']);
 
-        $this->assertSame($app['mongodbs']['mongo1'], $app['mongodb']);
-        $this->assertInstanceOf('Doctrine\MongoDB\Connection', $app['mongodb']);
+        $this->assertSame($app['mongodbs']['mongo1'], $mongodb);
+        $this->assertInstanceOf('Doctrine\MongoDB\Connection', $mongodb);
 
         $this->assertSame($app['mongodbs.config']['mongo1'], $app['mongodb.config']);
         $this->assertInstanceOf('Doctrine\MongoDB\Configuration', $app['mongodb.config']);
