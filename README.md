@@ -43,7 +43,7 @@ Example for multiple connections:
 ``` {.php}
 $app->register(new DoctrineMongoDbProvider(), array(
     'mongodbs.options' => array(
-        'mongo_read' => array(
+        'mongo1' => array(
             'server' => 'mongodb://localhost:27017',
             'options' => array(
                 'username' => 'root',
@@ -51,7 +51,7 @@ $app->register(new DoctrineMongoDbProvider(), array(
                 'db' => 'admin'
             )
         ),
-        'mongo_write' => array(
+        'mongo2' => array(
             'server' => 'mongodb://localhost:27018',
             'options' => array(
                 'username' => 'root',
@@ -83,7 +83,7 @@ Example for multiple connections:
 ``` {.php}
 $document = array('key' => 'value');
 
-$app['mongodbs']['mongo_write']
+$app['mongodbs']['mongo1']
     ->selectDatabase('saxulum-doctrine-mongodb-provider')
     ->selectCollection('sample')
     ->insert($document)
