@@ -58,15 +58,14 @@ class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
             )
         ));
 
-        $this->assertSame($app['mongodbs']['default'], $app['mongodb']);
+        $this->assertSame('mongo1', $app['mongodbs.default']);
+
         $this->assertSame($app['mongodbs']['mongo1'], $app['mongodb']);
         $this->assertInstanceOf('Doctrine\MongoDB\Connection', $app['mongodb']);
 
-        $this->assertSame($app['mongodbs.config']['default'], $app['mongodb.config']);
         $this->assertSame($app['mongodbs.config']['mongo1'], $app['mongodb.config']);
         $this->assertInstanceOf('Doctrine\MongoDB\Configuration', $app['mongodb.config']);
 
-        $this->assertSame($app['mongodbs.event_manager']['default'], $app['mongodb.event_manager']);
         $this->assertSame($app['mongodbs.event_manager']['mongo1'], $app['mongodb.event_manager']);
         $this->assertInstanceOf('Doctrine\Common\EventManager', $app['mongodb.event_manager']);
 
