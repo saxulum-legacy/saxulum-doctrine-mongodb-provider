@@ -28,7 +28,7 @@ Example for one connection:
 ``` {.php}
 $app->register(new DoctrineMongoDbProvider(), array(
     'mongodb.options' => array(
-        'server' => 'mongodb://localhost:27017',
+        'server' => 'mongodb://localhost:27017/test',
         'options' => array(
             'username' => 'root',
             'password' => 'root',
@@ -44,7 +44,7 @@ Example for multiple connections:
 $app->register(new DoctrineMongoDbProvider(), array(
     'mongodbs.options' => array(
         'mongo1' => array(
-            'server' => 'mongodb://localhost:27017',
+            'server' => 'mongodb://localhost:27017/test',
             'options' => array(
                 'username' => 'root',
                 'password' => 'root',
@@ -52,7 +52,7 @@ $app->register(new DoctrineMongoDbProvider(), array(
             )
         ),
         'mongo2' => array(
-            'server' => 'mongodb://localhost:27018',
+            'server' => 'mongodb://localhost:27018/test',
             'options' => array(
                 'username' => 'root',
                 'password' => 'root',

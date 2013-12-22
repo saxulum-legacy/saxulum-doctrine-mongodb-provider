@@ -15,7 +15,11 @@ class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
         }
 
         $app = new Application('test');
-        $app->register(new DoctrineMongoDbProvider());
+        $app->register(new DoctrineMongoDbProvider(), array(
+            'mongodb.options' => array(
+                'server' => 'mongodb://localhost:27017/test'
+            )
+        ));
 
         /** @var Connection $mongodb */
         $mongodb = $app['mongodb'];
@@ -50,10 +54,10 @@ class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
         $app->register(new DoctrineMongoDbProvider(), array(
             'mongodbs.options' => array(
                 'mongo1' => array(
-                    'server' => 'mongodb://localhost:27017'
+                    'server' => 'mongodb://localhost:27017/test'
                 ),
                 'mongo2' => array(
-                    'server' => 'mongodb://localhost:27017'
+                    'server' => 'mongodb://localhost:27017/test'
                 ),
             )
         ));
