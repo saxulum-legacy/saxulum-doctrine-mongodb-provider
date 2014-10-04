@@ -5,11 +5,13 @@ namespace Saxulum\DoctrineMongoDb\Provider;
 use Doctrine\Common\EventManager;
 use Doctrine\MongoDB\Configuration;
 use Doctrine\MongoDB\Connection;
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 use Saxulum\DoctrineMongoDb\Logger\Logger;
 
-class DoctrineMongoDbProvider
+class DoctrineMongoDbProvider implements ServiceProviderInterface
 {
-    public function register(\Pimple $container)
+    public function register(Container $container)
     {
         $container['mongodb.default_options'] = array(
             'server' => 'mongodb://localhost:27017',
@@ -41,10 +43,10 @@ class DoctrineMongoDbProvider
             $container['mongodbs.options'] = $tmp;
         });
 
-        $container['mongodbs'] = $container->share(function ($container) {
+        $container['mongodbs'] = function ($container) {
             $container['mongodbs.options.initializer']();
 
-            $mongodbs = new \Pimple();
+            $mongodbs = new Container();
             foreach ($container['mongodbs.options'] as $name => $options) {
                 if ($container['mongodbs.default'] === $name) {
                     // we use shortcuts here in case the default has been overridden
@@ -55,18 +57,18 @@ class DoctrineMongoDbProvider
                     $manager = $container['mongodbs.event_manager'][$name];
                 }
 
-                $mongodbs[$name] = $mongodbs->share(function () use ($options, $config, $manager) {
+                $mongodbs[$name] = function () use ($options, $config, $manager) {
                     return new Connection($options['server'], $options['options'], $config, $manager);
-                });
+                };
             }
 
             return $mongodbs;
-        });
+        };
 
-        $container['mongodbs.config'] = $container->share(function ($container) {
+        $container['mongodbs.config'] = function ($container) {
             $container['mongodbs.options.initializer']();
 
-            $configs = new \Pimple();
+            $configs = new Container();
             foreach ($container['mongodbs.options'] as $name => $options) {
                 $configs[$name] = new Configuration();
 
@@ -77,36 +79,36 @@ class DoctrineMongoDbProvider
             }
 
             return $configs;
-        });
+        };
 
-        $container['mongodbs.event_manager'] = $container->share(function ($container) {
+        $container['mongodbs.event_manager'] = function ($container) {
             $container['mongodbs.options.initializer']();
 
-            $managers = new \Pimple();
+            $managers = new Container();
             foreach ($container['mongodbs.options'] as $name => $options) {
                 $managers[$name] = new EventManager();
             }
 
             return $managers;
-        });
+        };
 
         // shortcuts for the "first" DB
-        $container['mongodb'] = $container->share(function ($container) {
+        $container['mongodb'] = function ($container) {
             $mongodbs = $container['mongodbs'];
 
             return $mongodbs[$container['mongodbs.default']];
-        });
+        };
 
-        $container['mongodb.config'] = $container->share(function ($container) {
+        $container['mongodb.config'] = function ($container) {
             $mongodbs = $container['mongodbs.config'];
 
             return $mongodbs[$container['mongodbs.default']];
-        });
+        };
 
-        $container['mongodb.event_manager'] = $container->share(function ($container) {
+        $container['mongodb.event_manager'] = function ($container) {
             $mongodbs = $container['mongodbs.event_manager'];
 
             return $mongodbs[$container['mongodbs.default']];
-        });
+        };
     }
 }

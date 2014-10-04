@@ -1,10 +1,10 @@
 <?php
 
-namespace Saxulum\Tests\DoctrineMongoDb\Cilex\Provider;
+namespace Saxulum\Tests\DoctrineMongoDb\Silex\Provider;
 
 use Doctrine\MongoDB\Connection;
-use Saxulum\DoctrineMongoDb\Cilex\Provider\DoctrineMongoDbProvider;
-use Cilex\Application;
+use Pimple\Container;
+use Saxulum\DoctrineMongoDb\Provider\DoctrineMongoDbProvider;
 
 class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,7 +14,7 @@ class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('mongo is not available');
         }
 
-        $app = new Application('test');
+        $app = new Container();
         $app->register(new DoctrineMongoDbProvider());
 
         /** @var Connection $mongodb */
@@ -46,7 +46,7 @@ class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('mongo is not available');
         }
 
-        $app = new Application('test');
+        $app = new Container();
         $app->register(new DoctrineMongoDbProvider(), array(
             'mongodbs.options' => array(
                 'mongo1' => array(
