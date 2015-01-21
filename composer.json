@@ -11,8 +11,8 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "doctrine/mongodb": "~1.1",
         "pimple/pimple": ">=2.1,<4",
+        "doctrine/mongodb": "1.1.x-dev",
         "psr/log": "1.0.*"
     },
     "require-dev": {
