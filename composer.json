@@ -1,5 +1,5 @@
 {
-    "name": "saxulum/saxulum-doctrine-mongodb-provider",
+    "name": "df/saxulum-doctrine-mongodb-provider",
     "description": "Dunkelfrosch fork of saxulum Doctrine MongoDB Provider",
     "keywords": ["saxulum", "pimple", "cilex", "silex", "doctrine", "mongo", "mongodb"],
     "license": "MIT",
