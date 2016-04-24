@@ -1,20 +1,25 @@
 <?php
 
-namespace Saxulum\Tests\DoctrineMongoDb\Silex\Provider;
+namespace Saxulum\Tests\DoctrineMongoDb\Cilex\Provider;
 
 use Doctrine\MongoDB\Connection;
-use Pimple\Container;
-use Saxulum\DoctrineMongoDb\Provider\DoctrineMongoDbProvider;
+use Saxulum\DoctrineMongoDb\Cilex\Provider\DoctrineMongoDbProvider;
+use Cilex\Application;
 
+/**
+ * Class DoctrineMongoDbProviderTest
+ *
+ * @package Saxulum\Tests\DoctrineMongoDb\Cilex\Provider
+ */
 class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * testing single connection configuration read and build
+     */
     public function testSingleConnection()
     {
-        if (!extension_loaded('mongo')) {
-            $this->markTestSkipped('mongo is not available');
-        }
 
-        $app = new Container();
+        $app = new Application('test');
         $app->register(new DoctrineMongoDbProvider());
 
         /** @var Connection $mongodb */
@@ -32,7 +37,7 @@ class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
         $database = $mongodb->selectDatabase('saxulum-doctrine-mongodb-provider');
         $collection = $database->selectCollection('sample');
 
-        $document = array('key' => 'value');
+        $document = ['key' => 'value'];
         $collection->insert($document);
 
         $this->assertArrayHasKey('_id', $document);
@@ -40,23 +45,22 @@ class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
         $database->dropCollection('sample');
     }
 
+    /**
+     * testing multiple connection configuration read and build
+     */
     public function testMultipleConnections()
     {
-        if (!extension_loaded('mongo')) {
-            $this->markTestSkipped('mongo is not available');
-        }
-
-        $app = new Container();
-        $app->register(new DoctrineMongoDbProvider(), array(
-            'mongodbs.options' => array(
-                'mongo1' => array(
+        $app = new Application('test');
+        $app->register(new DoctrineMongoDbProvider(), [
+            'mongodbs.options' => [
+                'mongo1' => [
                     'server' => 'mongodb://localhost:27017'
-                ),
-                'mongo2' => array(
+                ],
+                'mongo2' => [
                     'server' => 'mongodb://localhost:27017'
-                ),
-            )
-        ));
+                ],
+            ]
+        ]);
 
         /** @var Connection $mongodb */
         $mongodb = $app['mongodb'];

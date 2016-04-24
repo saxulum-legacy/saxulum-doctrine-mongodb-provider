@@ -4,11 +4,16 @@ namespace Saxulum\DoctrineMongoDb\Logger;
 
 use Psr\Log\LoggerInterface as PsrLoggerInterface;
 
+/**
+ * Class Logger
+ * 
+ * @package Saxulum\DoctrineMongoDb\Logger
+ */
 class Logger implements LoggerInterface
 {
     private $logger;
     private $prefix;
-    private $batchInsertTreshold;
+    private $batchInsertThreshold;
 
     public function __construct(PsrLoggerInterface $logger = null, $prefix = 'MongoDB query: ')
     {
@@ -16,9 +21,9 @@ class Logger implements LoggerInterface
         $this->prefix = $prefix;
     }
 
-    public function setBatchInsertThreshold($batchInsertTreshold)
+    public function setBatchInsertThreshold($batchInsertThreshold)
     {
-        $this->batchInsertTreshold = $batchInsertTreshold;
+        $this->batchInsertThreshold = $batchInsertThreshold;
     }
 
     public function logQuery(array $query)
@@ -27,7 +32,7 @@ class Logger implements LoggerInterface
             return;
         }
 
-        if (isset($query['batchInsert']) && null !== $this->batchInsertTreshold && $this->batchInsertTreshold <= $query['num']) {
+        if (isset($query['batchInsert']) && null !== $this->batchInsertThreshold && $this->batchInsertThreshold <= $query['num']) {
             $query['data'] = '**'.$query['num'].' item(s)**';
         }
 
