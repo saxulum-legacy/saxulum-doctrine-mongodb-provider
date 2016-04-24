@@ -23,14 +23,13 @@ class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
 
         /** @var Connection $mongodb */
         $mongodb = $app['mongodb'];
-
-        $this->assertSame($app['mongodbs']['default'], $mongodb);
+        $this->assertEquals($app['mongodbs']['default'], $mongodb);
         $this->assertInstanceOf('Doctrine\MongoDB\Connection', $mongodb);
 
-        $this->assertSame($app['mongodbs.config']['default'], $app['mongodb.config']);
+        $this->assertEquals($app['mongodbs.config']['default'], $app['mongodb.config']);
         $this->assertInstanceOf('Doctrine\MongoDB\Configuration', $app['mongodb.config']);
 
-        $this->assertSame($app['mongodbs.event_manager']['default'], $app['mongodb.event_manager']);
+        $this->assertEquals($app['mongodbs.event_manager']['default'], $app['mongodb.event_manager']);
         $this->assertInstanceOf('Doctrine\Common\EventManager', $app['mongodb.event_manager']);
 
         $database = $mongodb->selectDatabase('saxulum-doctrine-mongodb-provider');
@@ -64,15 +63,15 @@ class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
         /** @var Connection $mongodb */
         $mongodb = $app['mongodb'];
 
-        $this->assertSame('mongo1', $app['mongodbs.default']);
+        $this->assertEquals('mongo1', $app['mongodbs.default']);
 
-        $this->assertSame($app['mongodbs']['mongo1'], $mongodb);
+        $this->assertEquals($app['mongodbs']['mongo1'], $mongodb);
         $this->assertInstanceOf('Doctrine\MongoDB\Connection', $mongodb);
 
-        $this->assertSame($app['mongodbs.config']['mongo1'], $app['mongodb.config']);
+        $this->assertEquals($app['mongodbs.config']['mongo1'], $app['mongodb.config']);
         $this->assertInstanceOf('Doctrine\MongoDB\Configuration', $app['mongodb.config']);
 
-        $this->assertSame($app['mongodbs.event_manager']['mongo1'], $app['mongodb.event_manager']);
+        $this->assertEquals($app['mongodbs.event_manager']['mongo1'], $app['mongodb.event_manager']);
         $this->assertInstanceOf('Doctrine\Common\EventManager', $app['mongodb.event_manager']);
 
         $this->assertInstanceOf('Doctrine\MongoDB\Connection', $app['mongodbs']['mongo2']);
