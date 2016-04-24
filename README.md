@@ -1,5 +1,5 @@
-saxulum-doctrine-mongodb-provider
-=================================
+df-doctrine-mongodb-provider
+============================
 
 **works with plain silex-php**
 
@@ -15,13 +15,13 @@ Features
 Requirements
 ------------
 
- * PHP 5.3+
- * Doctrine Mongodb 1.0 Beta+
+ * PHP 7.0+
+ * Doctrine Mongodb 1.0.3+
 
 Installation
 ------------
 
-Through [Composer](http://getcomposer.org) as [saxulum/saxulum-doctrine-mongodb-provider][4].
+Through [Composer](http://getcomposer.org) as [df/saxulum-doctrine-mongodb-provider][4].
 
 Example for one connection:
 
@@ -93,6 +93,7 @@ $app['mongodbs']['mongo1']
 Copyright
 ---------
 * Dominik Zogg <dominik.zogg@gmail.com>
+* Patrick Paechnatz <patrick.paechnatz@gmail.com>
 * Fabien Potencier <fabien@symfony.com> ([DoctrineServiceProvider][5], Logger)
 * Kris Wallsmith <kris@symfony.com> (Logger)
 
