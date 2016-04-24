@@ -17,9 +17,9 @@
     ],
     "require": {
         "php": "^7.0",
-        "alcaeus/mongo-php-adapter": "^1.0.0",
+        "alcaeus/mongo-php-adapter": "^1.0",
+        "doctrine/mongodb-odm": "^1.0",
         "pimple/pimple": "~1.0",
-        "doctrine/mongodb": "dev-master",
         "psr/log": "1.0.*",
         "mongodb/mongodb": "^1.0.0"
     },
