@@ -15,17 +15,31 @@ class Logger implements LoggerInterface
     private $prefix;
     private $batchInsertThreshold;
 
+    /**
+     * Logger constructor.
+     *
+     * @param PsrLoggerInterface|null $logger
+     * @param string                  $prefix
+     */
     public function __construct(PsrLoggerInterface $logger = null, $prefix = 'MongoDB query: ')
     {
         $this->logger = $logger;
         $this->prefix = $prefix;
     }
 
+    /**
+     * @param $batchInsertThreshold
+     */
     public function setBatchInsertThreshold($batchInsertThreshold)
     {
         $this->batchInsertThreshold = $batchInsertThreshold;
     }
 
+    /**
+     * @param array $query
+     *
+     * @return null
+     */
     public function logQuery(array $query)
     {
         if (null === $this->logger) {
