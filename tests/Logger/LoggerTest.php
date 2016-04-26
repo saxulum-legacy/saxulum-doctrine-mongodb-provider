@@ -1,6 +1,6 @@
 <?php
 
-namespace Saxulum\Tests\DoctrineMongoDb\Loggger;
+namespace Saxulum\Tests\DoctrineMongoDb\Logger;
 
 use Psr\Log\AbstractLogger;
 use Saxulum\DoctrineMongoDb\Logger\Logger;
@@ -8,7 +8,7 @@ use Saxulum\DoctrineMongoDb\Logger\Logger;
 /**
  * Class LoggerTest
  *
- * @package Saxulum\Tests\DoctrineMongoDb\Loggger
+ * @package Saxulum\Tests\DoctrineMongoDb\Logger
  */
 class LoggerTest extends \PHPUnit_Framework_TestCase
 {
@@ -32,7 +32,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
 /**
  * Class TestLogger
  *
- * @package Saxulum\Tests\DoctrineMongoDb\Loggger
+ * @package Saxulum\Tests\DoctrineMongoDb\Logger
  */
 class TestLogger extends AbstractLogger
 {
@@ -44,7 +44,7 @@ class TestLogger extends AbstractLogger
     /**
      * Logs with an arbitrary level.
      *
-     * @param  mixed  $level
+     * @param  string $level
      * @param  string $message
      * @param  array  $context
      * @return null

@@ -11,8 +11,8 @@
             "email": "dominik.zogg@gmail.com"
         },
         {
-          "name": "Patrick Paechnatz",
-          "email": "patrick.paechnatz@gmail.com"
+            "name": "Patrick Paechnatz",
+            "email": "patrick.paechnatz@gmail.com"
         }
     ],
     "require": {
@@ -28,6 +28,6 @@
         "silex/silex": "2.0.x-dev"
     },
     "autoload": {
-      "psr-0": { "Saxulum\\DoctrineMongoDb": "src/" }
+      "psr-4": { "Saxulum\\DoctrineMongoDb\\": "src/" }
     }
 }

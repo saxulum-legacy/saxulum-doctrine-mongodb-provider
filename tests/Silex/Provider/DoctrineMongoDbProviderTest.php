@@ -1,15 +1,15 @@
 <?php
 
-namespace Saxulum\Tests\DoctrineMongoDb\Silex\Provider;
+namespace Saxulum\Tests\DoctrineMongoDb\Provider;
 
+use Silex\Application;
 use Doctrine\MongoDB\Connection;
 use Saxulum\DoctrineMongoDb\Silex\Provider\DoctrineMongoDbProvider;
-use Silex\Application;
 
 /**
  * Class DoctrineMongoDbProviderTest
  *
- * @package Saxulum\Tests\DoctrineMongoDb\Silex\Provider
+ * @package Saxulum\Tests\DoctrineMongoDb\Provider
  */
 class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
 {
