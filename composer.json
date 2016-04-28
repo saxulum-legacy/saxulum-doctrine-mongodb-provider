@@ -30,11 +30,6 @@
         "phpunit/phpunit": "^4.7",
         "silex/silex": "2.0.x-dev"
     },
-    "extra": {
-        "branch-alias": {
-          "dev-master": "2.0.x-dev"
-        }
-    },
     "autoload": {
       "psr-4": { "Saxulum\\DoctrineMongoDb\\": "src/" }
     }
