@@ -24,7 +24,7 @@ Requirements
 
 Notes
 -----
- * this version wont be compatible for php <= 5.6 now
+ * this version wont be compatible for php <= 5.6.n now
  * this version wont be runnable under cilex and silex < 2.n
 
 
