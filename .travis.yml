@@ -11,6 +11,6 @@ php:
 before_script:
   - phpenv config-rm xdebug.ini
   - echo "extension = mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - composer --prefer-source --no-interaction --dev update
+  - composer --prefer-source --no-interaction update
 
 script: phpunit --coverage-text --verbose
