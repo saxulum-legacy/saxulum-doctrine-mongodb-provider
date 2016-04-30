@@ -1,6 +1,9 @@
 language: php
 
-services: mongodb
+sudo: true
+
+services:
+  - mongodb
 
 php:
   - 7.0
@@ -9,12 +12,12 @@ cache:
   directories:
     - $HOME/.composer/cache
 
-sudo: false
+before_script:
+  - echo "extension = mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - phpenv config-rm xdebug.ini
 
-before_install:
-  - composer selfupdate
+before_install: composer selfupdate
 
-install:
-  - composer update --prefer-dist --no-interaction
+install: composer update --prefer-dist --no-interaction
 
 script: phpunit --coverage-text --verbose
