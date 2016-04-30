@@ -8,16 +8,9 @@ services:
 php:
   - 7.0
 
-cache:
-  directories:
-    - $HOME/.composer/cache
-
 before_script:
   - echo "extension = mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - phpenv config-rm xdebug.ini
-
-before_install: composer selfupdate
-
-install: composer update --prefer-dist --no-interaction
+  # - composer --prefer-source --no-interaction --dev update
 
 script: phpunit --coverage-text --verbose
