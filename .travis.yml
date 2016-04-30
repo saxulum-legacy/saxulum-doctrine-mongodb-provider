@@ -5,8 +5,16 @@ services: mongodb
 php:
   - 7.0
 
-before_script:
-  - echo 'extension=mongo.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - composer --prefer-source --dev install
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+sudo: false
+
+before_install:
+  - composer selfupdate
+
+install:
+  - composer update --prefer-dist --no-interaction
 
 script: phpunit --coverage-text --verbose

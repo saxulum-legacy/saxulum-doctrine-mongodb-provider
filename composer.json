@@ -1,15 +1,10 @@
 {
-    "name": "df/doctrine-mongodb-provider",
-    "description": "Dunkelfrosch fork of saxulum doctrine mongoDb provider for usage in PHP 7.n",
-    "keywords": ["dunkelfrosch", "saxulum", "pimple", "silex", "doctrine", "mongo", "mongodb", "odm"],
+    "name": "saxulum/saxulum-doctrine-mongodb-provider",
+    "description": "Saxulum Doctrine MongoDB Provider",
+    "keywords": ["saxulum", "pimple", "cilex", "silex", "doctrine", "mongo", "mongodb"],
     "license": "MIT",
     "type": "library",
-    "time": "2016-04-25",
     "authors": [
-        {
-            "name": "Patrick Paechnatz",
-            "email": "patrick.paechnatz@gmail.com"
-        },
         {
             "name": "Dominik Zogg",
             "email": "dominik.zogg@gmail.com"
