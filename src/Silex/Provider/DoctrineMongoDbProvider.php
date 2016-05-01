@@ -1,11 +1,17 @@
 <?php
 
-namespace Saxulum\DoctrineMongoDb\Cilex\Provider;
+namespace Saxulum\DoctrineMongoDb\Silex\Provider;
 
 use Saxulum\DoctrineMongoDb\Provider\DoctrineMongoDbProvider as BaseDoctrineMongoDbProvider;
-use Cilex\Application;
-use Cilex\ServiceProviderInterface;
+use Silex\Application;
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 
+/**
+ * Class DoctrineMongoDbProvider
+ * 
+ * @package Saxulum\DoctrineMongoDb\Silex\Provider
+ */
 class DoctrineMongoDbProvider implements ServiceProviderInterface
 {
     /**
@@ -18,9 +24,9 @@ class DoctrineMongoDbProvider implements ServiceProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function register(Application $app)
+    public function register(Container $container)
     {
         $pimpleServiceProvider = new BaseDoctrineMongoDbProvider;
-        $pimpleServiceProvider->register($app);
+        $pimpleServiceProvider->register($container);
     }
 }
