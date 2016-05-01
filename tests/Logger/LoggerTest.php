@@ -1,26 +1,39 @@
 <?php
 
-namespace Saxulum\Tests\DoctrineMongoDb\Loggger;
+namespace Saxulum\Tests\DoctrineMongoDb\Logger;
 
 use Psr\Log\AbstractLogger;
 use Saxulum\DoctrineMongoDb\Logger\Logger;
 
+/**
+ * Class LoggerTest
+ *
+ * @package Saxulum\Tests\DoctrineMongoDb\Logger
+ */
 class LoggerTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * test logging behaviour
+     */
     public function testLog()
     {
         $testLogger = new TestLogger();
 
         $logger = new Logger($testLogger);
-        $logger->logQuery(array(
-            'insert' => array('key' => 'value')
-        ));
+        $logger->logQuery([
+            'insert' => ['key' => 'value']
+        ]);
 
         $logEntries = $testLogger->getLogEntries();
         $this->assertEquals('MongoDB query: {"insert":{"key":"value"}}', $logEntries['info'][0]);
     }
 }
 
+/**
+ * Class TestLogger
+ *
+ * @package Saxulum\Tests\DoctrineMongoDb\Logger
+ */
 class TestLogger extends AbstractLogger
 {
     /**
@@ -31,12 +44,12 @@ class TestLogger extends AbstractLogger
     /**
      * Logs with an arbitrary level.
      *
-     * @param  mixed  $level
+     * @param  string $level
      * @param  string $message
      * @param  array  $context
      * @return null
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, array $context = [])
     {
         $this->logEntries[$level][] = $message;
     }

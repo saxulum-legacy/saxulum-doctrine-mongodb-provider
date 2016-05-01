@@ -2,22 +2,29 @@
 
 namespace Saxulum\DoctrineMongoDb\Provider;
 
+use Pimple\Container;
 use Doctrine\Common\EventManager;
 use Doctrine\MongoDB\Configuration;
 use Doctrine\MongoDB\Connection;
-use Pimple\Container;
-use Pimple\ServiceProviderInterface;
 use Saxulum\DoctrineMongoDb\Logger\Logger;
 
-class DoctrineMongoDbProvider implements ServiceProviderInterface
+/**
+ * Class DoctrineMongoDbProvider
+ *
+ * @package Saxulum\DoctrineMongoDb\Provider
+ */
+class DoctrineMongoDbProvider
 {
+    /**
+     * @param Container $container
+     */
     public function register(Container $container)
     {
-        $container['mongodb.default_options'] = array(
+        /** @link http://www.php.net/manual/en/mongoclient.construct.php */
+        $container['mongodb.default_options'] = [
             'server' => 'mongodb://localhost:27017',
-            'options' => array()
-            /** @link http://www.php.net/manual/en/mongoclient.construct.php */
-        );
+            'options' => []
+        ];
 
         $container['mongodbs.options.initializer'] = $container->protect(function () use ($container) {
             static $initialized = false;
@@ -29,7 +36,7 @@ class DoctrineMongoDbProvider implements ServiceProviderInterface
             $initialized = true;
 
             if (!isset($container['mongodbs.options'])) {
-                $container['mongodbs.options'] = array('default' => isset($container['mongodb.options']) ? $container['mongodb.options'] : array());
+                $container['mongodbs.options'] = ['default' => isset($container['mongodb.options']) ? $container['mongodb.options'] : []];
             }
 
             $tmp = $container['mongodbs.options'];
@@ -74,7 +81,7 @@ class DoctrineMongoDbProvider implements ServiceProviderInterface
 
                 if (isset($container['logger'])) {
                     $logger = new Logger($container['logger']);
-                    $configs[$name]->setLoggerCallable(array($logger,'logQuery'));
+                    $configs[$name]->setLoggerCallable([$logger,'logQuery']);
                 }
             }
 
