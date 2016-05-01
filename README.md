@@ -18,14 +18,9 @@ Features
 Requirements
 ------------
 
- * PHP 7.0+
- * Doctrine Mongodb 1.0.3+
-
-
-Notes
------
- * this version wont be compatible for php <= 5.6.n now
- * this version wont be runnable under cilex and silex < 2.n
+ * PHP >= 5.5.n
+ * Silex 2.n (pimple 3.n)
+ * Doctrine Mongodb (current dev/master)
 
 
 Installation
