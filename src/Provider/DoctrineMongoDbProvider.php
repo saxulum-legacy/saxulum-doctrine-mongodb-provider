@@ -50,7 +50,7 @@ class DoctrineMongoDbProvider
             $container['mongodbs.options'] = $tmp;
         });
 
-        $container['mongodbs'] = $container->factory(function ($container) {
+        $container['mongodbs'] = function ($container) {
             $container['mongodbs.options.initializer']();
 
             $mongodbs = new Container();
@@ -64,15 +64,15 @@ class DoctrineMongoDbProvider
                     $manager = $container['mongodbs.event_manager'][$name];
                 }
 
-                $mongodbs[$name] = $mongodbs->factory(function () use ($options, $config, $manager) {
+                $mongodbs[$name] = function () use ($options, $config, $manager) {
                     return new Connection($options['server'], $options['options'], $config, $manager);
-                });
+                };
             }
 
             return $mongodbs;
-        });
+        };
 
-        $container['mongodbs.config'] = $container->factory(function ($container) {
+        $container['mongodbs.config'] = function ($container) {
             $container['mongodbs.options.initializer']();
 
             $configs = new Container();
@@ -86,9 +86,9 @@ class DoctrineMongoDbProvider
             }
 
             return $configs;
-        });
+        };
 
-        $container['mongodbs.event_manager'] = $container->factory(function ($container) {
+        $container['mongodbs.event_manager'] = function ($container) {
             $container['mongodbs.options.initializer']();
 
             $managers = new Container();
@@ -97,25 +97,25 @@ class DoctrineMongoDbProvider
             }
 
             return $managers;
-        });
+        };
 
         // shortcuts for the "first" DB
-        $container['mongodb'] = $container->factory(function ($container) {
+        $container['mongodb'] = function ($container) {
             $mongodbs = $container['mongodbs'];
 
             return $mongodbs[$container['mongodbs.default']];
-        });
+        };
 
-        $container['mongodb.config'] = $container->factory(function ($container) {
+        $container['mongodb.config'] = function ($container) {
             $mongodbs = $container['mongodbs.config'];
 
             return $mongodbs[$container['mongodbs.default']];
-        });
+        };
 
-        $container['mongodb.event_manager'] = $container->factory(function ($container) {
+        $container['mongodb.event_manager'] = function ($container) {
             $mongodbs = $container['mongodbs.event_manager'];
 
             return $mongodbs[$container['mongodbs.default']];
-        });
+        };
     }
 }
