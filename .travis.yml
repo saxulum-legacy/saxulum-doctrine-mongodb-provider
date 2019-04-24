@@ -12,7 +12,8 @@ php:
   - 7.3
 
 before_script:
-  - echo 'extension=mongo.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - echo 'extension=mongo.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/mongo.ini
+  - echo 'extension=mongodb.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/mongodb.ini
   - composer --prefer-source --dev install
 
 script: phpunit --coverage-text --verbose
