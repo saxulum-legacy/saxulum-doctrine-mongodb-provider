@@ -15,7 +15,7 @@ Features
 Requirements
 ------------
 
- * PHP 5.3+
+ * PHP 5.6+
  * Doctrine Mongodb 1.0 Beta+
 
 Installation
