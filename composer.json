@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "php": "~7.0|~5.3",
+        "php": "~7.0|~5.6",
         "doctrine/mongodb": "~1.1",
         "pimple/pimple": ">=2.1,<4",
         "psr/log": "1.0.*"
