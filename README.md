@@ -49,7 +49,7 @@ $app->register(new DoctrineMongoDbProvider(), array(
             'password' => 'root',
             'db' => 'admin'
         ),
-        'driver.options => array(
+        'driverOptions => array(
             'ca_file' => '/some/ca.pem'
         )
     )
