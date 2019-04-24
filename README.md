@@ -38,6 +38,24 @@ $app->register(new DoctrineMongoDbProvider(), array(
 ));
 ```
 
+Example for one connection with custom ca file:
+
+``` {.php}
+$app->register(new DoctrineMongoDbProvider(), array(
+    'mongodb.options' => array(
+        'server' => 'mongodb://localhost:27017',
+        'options' => array(
+            'username' => 'root',
+            'password' => 'root',
+            'db' => 'admin'
+        ),
+        'driverOptions => array(
+            'ca_file' => '/some/ca.pem'
+        )
+    )
+));
+```
+
 Example for multiple connections:
 
 ``` {.php}

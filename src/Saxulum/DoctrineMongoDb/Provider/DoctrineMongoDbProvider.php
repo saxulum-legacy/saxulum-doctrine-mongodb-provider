@@ -15,7 +15,8 @@ class DoctrineMongoDbProvider implements ServiceProviderInterface
     {
         $container['mongodb.default_options'] = array(
             'server' => 'mongodb://localhost:27017',
-            'options' => array()
+            'options' => array(),
+            'driverOptions' => array()
             /** @link http://www.php.net/manual/en/mongoclient.construct.php */
         );
 
@@ -58,7 +59,7 @@ class DoctrineMongoDbProvider implements ServiceProviderInterface
                 }
 
                 $mongodbs[$name] = function () use ($options, $config, $manager) {
-                    return new Connection($options['server'], $options['options'], $config, $manager);
+                    return new Connection($options['server'], $options['options'], $config, $manager, $options['driverOptions']);
                 };
             }
 
