@@ -2,10 +2,11 @@
 
 namespace Saxulum\Tests\DoctrineMongoDb\Loggger;
 
+use PHPUnit\Framework\TestCase;
 use Psr\Log\AbstractLogger;
 use Saxulum\DoctrineMongoDb\Logger\Logger;
 
-class LoggerTest extends \PHPUnit_Framework_TestCase
+class LoggerTest extends TestCase
 {
     public function testLog()
     {
