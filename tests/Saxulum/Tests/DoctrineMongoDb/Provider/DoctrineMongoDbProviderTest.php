@@ -3,15 +3,16 @@
 namespace Saxulum\Tests\DoctrineMongoDb\Silex\Provider;
 
 use Doctrine\MongoDB\Connection;
+use PHPUnit\Framework\TestCase;
 use Pimple\Container;
 use Saxulum\DoctrineMongoDb\Provider\DoctrineMongoDbProvider;
 
-class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
+class DoctrineMongoDbProviderTest extends TestCase
 {
     public function testSingleConnection()
     {
-        if (!extension_loaded('mongo')) {
-            $this->markTestSkipped('mongo is not available');
+        if (!extension_loaded('mongodb')) {
+            $this->markTestSkipped('mongodb is not available');
         }
 
         $app = new Container();
@@ -42,8 +43,8 @@ class DoctrineMongoDbProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testMultipleConnections()
     {
-        if (!extension_loaded('mongo')) {
-            $this->markTestSkipped('mongo is not available');
+        if (!extension_loaded('mongodb')) {
+            $this->markTestSkipped('mongodb is not available');
         }
 
         $app = new Container();
